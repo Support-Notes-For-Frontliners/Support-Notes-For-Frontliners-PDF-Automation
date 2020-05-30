@@ -7,12 +7,18 @@ import FormGroup from '@material-ui/core/FormGroup'
 
 export default function Selector(props) {
     const [facilities, setFacilities] = React.useState({
-        "Seattle Children's Bellevue Clinic and Surgery Center": false,
+        "Seattle Children's Hospital": false,
         "Overlake Medical Center & Clinics": false,
         "Sunrise Senior Living: Bellevue": false,
+        "Sunrise Senior Living: Mercer Island": false,
         "Harborview Medical Center": false,
         "Island House Assisted Living": false,
         "Virginia Mason Hospital and Seattle Medical Center": false,
+        "EvergreenHealth Medical Center" : false,
+        "Mary's Place Seattle": false,
+        "Noel Women's House": false,
+        "Aloha Inn": false,
+        "Sacred Heart": false,
       });    
       
      const [checked, setChecked] = React.useState({
@@ -30,21 +36,21 @@ export default function Selector(props) {
 
     const handleSearch = (event) => {
         props.callBack(facilities, checked)
+        console.log(facilities)
     }
 
 
     return (
-        <div style={{width: "50%"}}>
+        <div style={{width: "50%", padding:10}}>
             <h1>Support Notes For Frontliners PDF Automation</h1>
             <br />
             <br />
             <h3>Select the Facility</h3>
-            <FormControlLabel label="Overlake Medical Center & Clinics" control={<Checkbox onChange={handleFacilities} name="Overlake Medical Center & Clinics" />}/>
-            <FormControlLabel label="Virginia Mason Hospital and Seattle Medical Center" control={<Checkbox onChange={handleFacilities} name="Virginia Mason Hospital and Seattle Medical Center">Virginia Mason</Checkbox>}/>
-            <FormControlLabel label="Harborview Medical Center" control={<Checkbox onChange={handleFacilities} name="Harborview Medical Center">Harborview Medical Center</Checkbox>}/>
-            <FormControlLabel label="Seattle Children's Bellevue Clinic and Surgery Center" control={<Checkbox onChange={handleFacilities} name="Seattle Children's Bellevue Clinic and Surgery Center">Seattle Chidrens Hospital</Checkbox>}/>
-            <FormControlLabel label="Island House Assisted Living" control={<Checkbox onChange={handleFacilities} name="Island House Assisted Living">Island House</Checkbox>}/>
-            <FormControlLabel label="Sunrise Senior Living: Bellevue" control={<Checkbox onChange={handleFacilities} name= "Sunrise Senior Living: Bellevue">Sunrise Senior Living</Checkbox>}/>
+            
+            {Object.keys(facilities).map((facilityName) =>(
+                <FormControlLabel key={facilityName} label={facilityName} control={<Checkbox onChange={handleFacilities} name={facilityName} />}/>
+            ))}
+            
             
             <h3>Filters</h3>
             <FormGroup row>
